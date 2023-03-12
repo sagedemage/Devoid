@@ -9,6 +9,8 @@ namespace Pong
         Texture2D ballTexture;
         Vector2 ballPosition;
         float ballSpeed;
+        // background color
+        Color background_color;
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
@@ -24,6 +26,7 @@ namespace Pong
             /* Initialize the game */
             ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             ballSpeed = 100f;
+            background_color = new Color(39, 79, 195);
 
             base.Initialize();
         }
@@ -89,7 +92,7 @@ namespace Pong
 
         protected override void Draw(GameTime gameTime) {
             /* Draw your content here */
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(background_color);
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
