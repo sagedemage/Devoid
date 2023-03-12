@@ -35,7 +35,7 @@ namespace Pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load your game content here
-            ballTexture = Content.Load<Texture2D>("ball");
+            ballTexture = Content.Load<Texture2D>("player");
         }
 
         protected override void Update(GameTime gameTime) {
