@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using System;
 
 namespace Pong
 {
@@ -47,45 +48,8 @@ namespace Pong
                 Exit();
 
             // TODO: Add your update logic here
-            var kstate = Keyboard.GetState();
-
-            /* Player Movement */
-            if (kstate.IsKeyDown(Keys.Up)) {
-                // Move the player up
-                ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (kstate.IsKeyDown(Keys.Down)) {
-                // Move the player down
-                ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (kstate.IsKeyDown(Keys.Left)) {
-                // Move the player left
-                ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            if (kstate.IsKeyDown(Keys.Right)) {
-                // Move the player right
-                ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-
-            /* Player Boundaries */
-            if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2) {
-                // Right Boundary
-                ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
-            }
-            else if (ballPosition.X < ballTexture.Width / 2) {
-                // Left Boundary
-                ballPosition.X = ballTexture.Width / 2;
-            }
-            
-            // Y boundaries
-            if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2) {
-                // Top Boundary
-                ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
-            }
-            else if (ballPosition.Y < ballTexture.Height / 2) {
-                // Botton Boundary
-                ballPosition.Y = ballTexture.Height / 2;
-            }
+            PlayerBoundaries();
+            Keybindings(gameTime);
 
             base.Update(gameTime);
         }
@@ -111,6 +75,56 @@ namespace Pong
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        protected void PlayerBoundaries() {
+            /* Player Boundaries */
+            if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
+            {
+                // Right Boundary
+                ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
+            }
+            else if (ballPosition.X < ballTexture.Width / 2)
+            {
+                // Left Boundary
+                ballPosition.X = ballTexture.Width / 2;
+            }
+            if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
+            {
+                // Top Boundary
+                ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
+            }
+            else if (ballPosition.Y < ballTexture.Height / 2)
+            {
+                // Botton Boundary
+                ballPosition.Y = ballTexture.Height / 2;
+            }
+        }
+
+        protected void Keybindings(GameTime gameTime) {
+            /* Player Movement */
+            var kstate = Keyboard.GetState();
+
+            if (kstate.IsKeyDown(Keys.Up))
+            {
+                // Move the player up
+                ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (kstate.IsKeyDown(Keys.Down))
+            {
+                // Move the player down
+                ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (kstate.IsKeyDown(Keys.Left))
+            {
+                // Move the player left
+                ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
+            if (kstate.IsKeyDown(Keys.Right))
+            {
+                // Move the player right
+                ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            }
         }
     }
 }
