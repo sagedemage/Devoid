@@ -127,6 +127,12 @@ namespace Pong
             var rightsidex = playerPosition.X < (wallPosition.X + wallTexture.Width) &&
                 playerPosition.X > (wallPosition.X - wallTexture.Width / 2);
 
+            var verticalsidex = playerPosition.X > (wallPosition.X - wallTexture.Width / 2) &&
+                playerPosition.X < (wallPosition.X + wallTexture.Width / 2);
+
+            var topsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height) &&
+                playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
+
             if (leftsidex && horizontalsidey) 
             {
                 playerPosition.X -= wallTexture.Width / 4;
@@ -135,6 +141,11 @@ namespace Pong
             if (rightsidex && horizontalsidey)
             {
                 playerPosition.X += wallTexture.Width / 4;
+            }
+
+            if (topsidey && verticalsidex)
+            {
+                playerPosition.Y -= wallTexture.Height / 4;
             }
         }
 
