@@ -7,9 +7,11 @@ namespace Pong
 {
     public class Game1 : Game {
         /* Game */
-        Texture2D ballTexture;
-        Vector2 ballPosition;
-        float ballSpeed;
+        Texture2D playerTexture;
+        Texture2D wallTexture;
+        Vector2 wallPosition;
+        Vector2 playerPosition;
+        float playerSpeed;
         // background color
         Color background_color;
 
@@ -25,8 +27,9 @@ namespace Pong
 
         protected override void Initialize() {
             /* Initialize the game */
-            ballPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
-            ballSpeed = 100f;
+            playerPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 2);
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+            playerSpeed = 100f;
             background_color = new Color(39, 79, 195);
 
             base.Initialize();
@@ -39,7 +42,10 @@ namespace Pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load your game content here
-            ballTexture = Content.Load<Texture2D>("player");
+            playerTexture = Content.Load<Texture2D>("player");
+
+            // Load your game content here
+            wallTexture = Content.Load<Texture2D>("wall");
         }
 
         protected override void Update(GameTime gameTime) {
@@ -60,16 +66,21 @@ namespace Pong
 
             // TODO: Add your drawing code here
             _spriteBatch.Begin();
+
+            // player
             _spriteBatch.Draw(
-                ballTexture,
-                ballPosition,
-                null,
-                Color.White,
-                0f,
-                new Vector2(ballTexture.Width / 2, ballTexture.Height / 2),
-                Vector2.One,
-                SpriteEffects.None,
-                0f
+                playerTexture, playerPosition, null,
+                Color.White, 0f,
+                new Vector2(playerTexture.Width / 2, playerTexture.Height / 2),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall
+            _spriteBatch.Draw(
+                wallTexture, wallPosition, null,
+                Color.White, 0f,
+                new Vector2(wallTexture.Width / 2, wallTexture.Height / 2),
+                Vector2.One, SpriteEffects.None, 0f
             );
 
             _spriteBatch.End();
@@ -79,25 +90,25 @@ namespace Pong
 
         protected void PlayerBoundaries() {
             /* Player Boundaries */
-            if (ballPosition.X > _graphics.PreferredBackBufferWidth - ballTexture.Width / 2)
+            if (playerPosition.X > _graphics.PreferredBackBufferWidth - playerTexture.Width / 2)
             {
                 // Right Boundary
-                ballPosition.X = _graphics.PreferredBackBufferWidth - ballTexture.Width / 2;
+                playerPosition.X = _graphics.PreferredBackBufferWidth - playerTexture.Width / 2;
             }
-            else if (ballPosition.X < ballTexture.Width / 2)
+            else if (playerPosition.X < playerTexture.Width / 2)
             {
                 // Left Boundary
-                ballPosition.X = ballTexture.Width / 2;
+                playerPosition.X = playerTexture.Width / 2;
             }
-            if (ballPosition.Y > _graphics.PreferredBackBufferHeight - ballTexture.Height / 2)
+            if (playerPosition.Y > _graphics.PreferredBackBufferHeight - playerTexture.Height / 2)
             {
                 // Top Boundary
-                ballPosition.Y = _graphics.PreferredBackBufferHeight - ballTexture.Height / 2;
+                playerPosition.Y = _graphics.PreferredBackBufferHeight - playerTexture.Height / 2;
             }
-            else if (ballPosition.Y < ballTexture.Height / 2)
+            else if (playerPosition.Y < playerTexture.Height / 2)
             {
                 // Botton Boundary
-                ballPosition.Y = ballTexture.Height / 2;
+                playerPosition.Y = playerTexture.Height / 2;
             }
         }
 
@@ -108,22 +119,22 @@ namespace Pong
             if (kstate.IsKeyDown(Keys.Up))
             {
                 // Move the player up
-                ballPosition.Y -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPosition.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Down))
             {
                 // Move the player down
-                ballPosition.Y += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPosition.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Left))
             {
                 // Move the player left
-                ballPosition.X -= ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPosition.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             if (kstate.IsKeyDown(Keys.Right))
             {
                 // Move the player right
-                ballPosition.X += ballSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                playerPosition.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
     }
