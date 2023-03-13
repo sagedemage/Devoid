@@ -25,7 +25,8 @@ namespace Pong
             IsMouseVisible = true;
         }
 
-        protected override void Initialize() {
+        protected override void Initialize() 
+        {
             /* Initialize the game */
             playerPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 2);
             wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
@@ -35,7 +36,8 @@ namespace Pong
             base.Initialize();
         }
 
-        protected override void LoadContent() {
+        protected override void LoadContent() 
+        {
             /* Load your game content */
 
             // Create a new SpriteBatch, which can be used to draw textures.
@@ -48,19 +50,22 @@ namespace Pong
             wallTexture = Content.Load<Texture2D>("wall");
         }
 
-        protected override void Update(GameTime gameTime) {
+        protected override void Update(GameTime gameTime) 
+        {
             /* Game Logic */
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
             // TODO: Add your update logic here
             PlayerBoundaries();
+            PlayerWallCollision();
             Keybindings(gameTime);
 
             base.Update(gameTime);
         }
 
-        protected override void Draw(GameTime gameTime) {
+        protected override void Draw(GameTime gameTime) 
+        {
             /* Draw your content here */
             GraphicsDevice.Clear(background_color);
 
@@ -88,31 +93,45 @@ namespace Pong
             base.Draw(gameTime);
         }
 
-        protected void PlayerBoundaries() {
+        protected void PlayerBoundaries() 
+        {
             /* Player Boundaries */
-            if (playerPosition.X > _graphics.PreferredBackBufferWidth - playerTexture.Width / 2)
-            {
+            if (playerPosition.X > _graphics.PreferredBackBufferWidth - playerTexture.Width / 2) {
                 // Right Boundary
                 playerPosition.X = _graphics.PreferredBackBufferWidth - playerTexture.Width / 2;
             }
-            else if (playerPosition.X < playerTexture.Width / 2)
-            {
+            else if (playerPosition.X < playerTexture.Width / 2) {
                 // Left Boundary
                 playerPosition.X = playerTexture.Width / 2;
             }
-            if (playerPosition.Y > _graphics.PreferredBackBufferHeight - playerTexture.Height / 2)
-            {
+            if (playerPosition.Y > _graphics.PreferredBackBufferHeight - playerTexture.Height / 2) {
                 // Top Boundary
                 playerPosition.Y = _graphics.PreferredBackBufferHeight - playerTexture.Height / 2;
             }
-            else if (playerPosition.Y < playerTexture.Height / 2)
-            {
+            else if (playerPosition.Y < playerTexture.Height / 2) {
                 // Botton Boundary
                 playerPosition.Y = playerTexture.Height / 2;
             }
         }
 
-        protected void Keybindings(GameTime gameTime) {
+        protected void PlayerWallCollision() 
+        {
+            /* Player Boundaries */
+
+            var leftsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) && 
+                playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
+
+            var leftsidex = playerPosition.X > (wallPosition.X - wallTexture.Width) &&
+                playerPosition.X < (wallPosition.X + wallTexture.Width);
+
+            if (leftsidex && leftsidey) 
+            {
+                playerPosition.X -= wallTexture.Width / 4;
+            }
+        }
+
+        protected void Keybindings(GameTime gameTime) 
+        {
             /* Player Movement */
             var kstate = Keyboard.GetState();
 
@@ -121,17 +140,17 @@ namespace Pong
                 // Move the player up
                 playerPosition.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if (kstate.IsKeyDown(Keys.Down))
+            else if (kstate.IsKeyDown(Keys.Down))
             {
                 // Move the player down
                 playerPosition.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if (kstate.IsKeyDown(Keys.Left))
+            else if (kstate.IsKeyDown(Keys.Left))
             {
                 // Move the player left
                 playerPosition.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            if (kstate.IsKeyDown(Keys.Right))
+            else if (kstate.IsKeyDown(Keys.Right))
             {
                 // Move the player right
                 playerPosition.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
