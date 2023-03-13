@@ -118,24 +118,21 @@ namespace Pong
         {
             /* Player Boundaries */
 
-            var leftsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) && 
+            var horizontalsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) && 
                 playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
 
             var leftsidex = playerPosition.X > (wallPosition.X - wallTexture.Width) &&
                 playerPosition.X < (wallPosition.X + wallTexture.Width / 2);
 
-            var rightsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) &&
-                playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
-
             var rightsidex = playerPosition.X < (wallPosition.X + wallTexture.Width) &&
                 playerPosition.X > (wallPosition.X - wallTexture.Width / 2);
 
-            if (leftsidex && leftsidey) 
+            if (leftsidex && horizontalsidey) 
             {
                 playerPosition.X -= wallTexture.Width / 4;
             }
 
-            if (rightsidex && rightsidey)
+            if (rightsidex && horizontalsidey)
             {
                 playerPosition.X += wallTexture.Width / 4;
             }
