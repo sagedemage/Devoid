@@ -133,6 +133,9 @@ namespace Pong
             var topsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height) &&
                 playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
 
+            var bottomsidey = playerPosition.Y < (wallPosition.Y + wallTexture.Height) &&
+                playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2);
+
             if (leftsidex && horizontalsidey) 
             {
                 playerPosition.X -= wallTexture.Width / 4;
@@ -146,6 +149,11 @@ namespace Pong
             if (topsidey && verticalsidex)
             {
                 playerPosition.Y -= wallTexture.Height / 4;
+            }
+
+            if (bottomsidey && verticalsidex)
+            {
+                playerPosition.Y += wallTexture.Height / 4;
             }
         }
 
