@@ -116,7 +116,7 @@ namespace Pong
 
         protected void PlayerWallCollision() 
         {
-            /* Player Boundaries */
+            /* Player Wall Collision */
 
             var horizontalsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) && 
                 playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
@@ -138,21 +138,25 @@ namespace Pong
 
             if (leftsidex && horizontalsidey) 
             {
+                // left side collision
                 playerPosition.X = wallPosition.X - wallTexture.Width / 2 - playerTexture.Width / 2;
             }
 
             if (rightsidex && horizontalsidey)
             {
+                // right side collision
                 playerPosition.X = wallPosition.X + wallTexture.Width / 2 + playerTexture.Width / 2;
             }
 
             if (topsidey && verticalsidex)
             {
+                // top side collision
                 playerPosition.Y = wallPosition.Y - wallTexture.Height / 2 - playerTexture.Height / 2;
             }
 
             if (bottomsidey && verticalsidex)
             {
+                // bottom side collision
                 playerPosition.Y = wallPosition.Y + wallTexture.Height / 2 + playerTexture.Height / 2;
             }
         }
