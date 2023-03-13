@@ -58,7 +58,7 @@ namespace Pong
 
             // TODO: Add your update logic here
             PlayerBoundaries();
-            PlayerWallCollision();
+            PlayerObjectCollision(wallPosition, wallTexture);
             Keybindings(gameTime);
 
             base.Update(gameTime);
@@ -114,54 +114,54 @@ namespace Pong
             }
         }
 
-        protected void PlayerWallCollision() 
+        private void PlayerObjectCollision(Vector2 objectPosition, Texture2D objectTexture) 
         {
-            /* Player Wall Collision */
+            /* Player Object Collision */
 
-            var horizontalsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2) && 
-                playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
+            var horizontalsidey = playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2) && 
+                playerPosition.Y < (objectPosition.Y + objectTexture.Height / 2);
 
-            var leftsidex = playerPosition.X > (wallPosition.X - wallTexture.Width) &&
-                playerPosition.X < (wallPosition.X + wallTexture.Width / 2);
+            var leftsidex = playerPosition.X > (objectPosition.X - objectTexture.Width) &&
+                playerPosition.X < (objectPosition.X + objectTexture.Width / 2);
 
-            var rightsidex = playerPosition.X < (wallPosition.X + wallTexture.Width) &&
-                playerPosition.X > (wallPosition.X - wallTexture.Width / 2);
+            var rightsidex = playerPosition.X < (objectPosition.X + objectTexture.Width) &&
+                playerPosition.X > (objectPosition.X - objectTexture.Width / 2);
 
-            var verticalsidex = playerPosition.X > (wallPosition.X - wallTexture.Width / 2) &&
-                playerPosition.X < (wallPosition.X + wallTexture.Width / 2);
+            var verticalsidex = playerPosition.X > (objectPosition.X - objectTexture.Width / 2) &&
+                playerPosition.X < (objectPosition.X + objectTexture.Width / 2);
 
-            var topsidey = playerPosition.Y > (wallPosition.Y - wallTexture.Height) &&
-                playerPosition.Y < (wallPosition.Y + wallTexture.Height / 2);
+            var topsidey = playerPosition.Y > (objectPosition.Y - objectTexture.Height) &&
+                playerPosition.Y < (objectPosition.Y + objectTexture.Height / 2);
 
-            var bottomsidey = playerPosition.Y < (wallPosition.Y + wallTexture.Height) &&
-                playerPosition.Y > (wallPosition.Y - wallTexture.Height / 2);
+            var bottomsidey = playerPosition.Y < (objectPosition.Y + objectTexture.Height) &&
+                playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2);
 
             if (leftsidex && horizontalsidey) 
             {
                 // left side collision
-                playerPosition.X = wallPosition.X - wallTexture.Width / 2 - playerTexture.Width / 2;
+                playerPosition.X = objectPosition.X - objectTexture.Width / 2 - playerTexture.Width / 2;
             }
 
             if (rightsidex && horizontalsidey)
             {
                 // right side collision
-                playerPosition.X = wallPosition.X + wallTexture.Width / 2 + playerTexture.Width / 2;
+                playerPosition.X = objectPosition.X + objectTexture.Width / 2 + playerTexture.Width / 2;
             }
 
             if (topsidey && verticalsidex)
             {
                 // top side collision
-                playerPosition.Y = wallPosition.Y - wallTexture.Height / 2 - playerTexture.Height / 2;
+                playerPosition.Y = objectPosition.Y - objectTexture.Height / 2 - playerTexture.Height / 2;
             }
 
             if (bottomsidey && verticalsidex)
             {
                 // bottom side collision
-                playerPosition.Y = wallPosition.Y + wallTexture.Height / 2 + playerTexture.Height / 2;
+                playerPosition.Y = objectPosition.Y + objectTexture.Height / 2 + playerTexture.Height / 2;
             }
         }
 
-        protected void Keybindings(GameTime gameTime) 
+        private void Keybindings(GameTime gameTime) 
         {
             /* Player Movement */
             var kstate = Keyboard.GetState();
