@@ -138,22 +138,22 @@ namespace Pong
 
             if (leftsidex && horizontalsidey) 
             {
-                playerPosition.X -= wallTexture.Width / 4;
+                playerPosition.X = wallPosition.X - wallTexture.Width / 2 - playerTexture.Width / 2;
             }
 
             if (rightsidex && horizontalsidey)
             {
-                playerPosition.X += wallTexture.Width / 4;
+                playerPosition.X = wallPosition.X + wallTexture.Width / 2 + playerTexture.Width / 2;
             }
 
             if (topsidey && verticalsidex)
             {
-                playerPosition.Y -= wallTexture.Height / 4;
+                playerPosition.Y = wallPosition.Y - wallTexture.Height / 2 - playerTexture.Height / 2;
             }
 
             if (bottomsidey && verticalsidex)
             {
-                playerPosition.Y += wallTexture.Height / 4;
+                playerPosition.Y = wallPosition.Y + wallTexture.Height / 2 + playerTexture.Height / 2;
             }
         }
 
