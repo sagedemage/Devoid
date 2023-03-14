@@ -118,7 +118,8 @@ namespace Pong
         {
             /* Player Object Collision */
 
-            var horizontalsidey = playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2) && 
+            // vertical side
+            var verticalside = playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2) && 
                 playerPosition.Y < (objectPosition.Y + objectTexture.Height / 2);
 
             var leftsidex = playerPosition.X > (objectPosition.X - objectTexture.Width) &&
@@ -127,7 +128,8 @@ namespace Pong
             var rightsidex = playerPosition.X < (objectPosition.X + objectTexture.Width) &&
                 playerPosition.X > (objectPosition.X - objectTexture.Width / 2);
 
-            var verticalsidex = playerPosition.X > (objectPosition.X - objectTexture.Width / 2) &&
+            // horizontal side
+            var horizontalside = playerPosition.X > (objectPosition.X - objectTexture.Width / 2) &&
                 playerPosition.X < (objectPosition.X + objectTexture.Width / 2);
 
             var topsidey = playerPosition.Y > (objectPosition.Y - objectTexture.Height) &&
@@ -136,25 +138,25 @@ namespace Pong
             var bottomsidey = playerPosition.Y < (objectPosition.Y + objectTexture.Height) &&
                 playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2);
 
-            if (leftsidex && horizontalsidey) 
+            if (leftsidex && verticalside) 
             {
                 // left side collision
                 playerPosition.X = objectPosition.X - objectTexture.Width / 2 - playerTexture.Width / 2;
             }
 
-            if (rightsidex && horizontalsidey)
+            if (rightsidex && verticalside)
             {
                 // right side collision
                 playerPosition.X = objectPosition.X + objectTexture.Width / 2 + playerTexture.Width / 2;
             }
 
-            if (topsidey && verticalsidex)
+            if (topsidey && horizontalside)
             {
                 // top side collision
                 playerPosition.Y = objectPosition.Y - objectTexture.Height / 2 - playerTexture.Height / 2;
             }
 
-            if (bottomsidey && verticalsidex)
+            if (bottomsidey && horizontalside)
             {
                 // bottom side collision
                 playerPosition.Y = objectPosition.Y + objectTexture.Height / 2 + playerTexture.Height / 2;
@@ -171,17 +173,17 @@ namespace Pong
                 // Move the player up
                 playerPosition.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (kstate.IsKeyDown(Keys.Down))
+            if (kstate.IsKeyDown(Keys.Down))
             {
                 // Move the player down
                 playerPosition.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (kstate.IsKeyDown(Keys.Left))
+            if (kstate.IsKeyDown(Keys.Left))
             {
                 // Move the player left
                 playerPosition.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-            else if (kstate.IsKeyDown(Keys.Right))
+            if (kstate.IsKeyDown(Keys.Right))
             {
                 // Move the player right
                 playerPosition.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
