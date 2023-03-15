@@ -119,8 +119,8 @@ namespace Pong
             /* Player Object Collision */
 
             // vertical side
-            var verticalside = playerPosition.Y > (objectPosition.Y - objectTexture.Height / 2) && 
-                playerPosition.Y < (objectPosition.Y + objectTexture.Height / 2);
+            var verticalside = playerPosition.Y > (objectPosition.Y - 4 * objectTexture.Height / 5) && 
+                playerPosition.Y < (objectPosition.Y + 4 * objectTexture.Height / 5);
 
             var leftsidex = playerPosition.X + playerTexture.Width / 2 > (objectPosition.X - objectTexture.Width / 2) &&
                 playerPosition.X + playerTexture.Width / 2 < (objectPosition.X + objectTexture.Width / 2);
@@ -129,8 +129,8 @@ namespace Pong
                 playerPosition.X - playerTexture.Width / 2 > (objectPosition.X - objectTexture.Width / 2);
 
             // horizontal side
-            var horizontalside = playerPosition.X > (objectPosition.X - objectTexture.Width / 2) &&
-                playerPosition.X < (objectPosition.X + objectTexture.Width / 2);
+            var horizontalside = playerPosition.X > (objectPosition.X - 4 * objectTexture.Width / 5) &&
+                playerPosition.X < (objectPosition.X + 4 * objectTexture.Width / 5);
 
             var topsidey = playerPosition.Y + playerTexture.Height / 2 > (objectPosition.Y - objectTexture.Height / 2) &&
                 playerPosition.Y + playerTexture.Height / 2 < (objectPosition.Y + objectTexture.Height / 2);
