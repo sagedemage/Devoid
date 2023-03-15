@@ -8,10 +8,8 @@ namespace Pong
     public class Game1 : Game {
         /* Game */
 
-        // player
-        Texture2D playerTexture;
-        Vector2 playerPosition;
-        float playerSpeed;
+        // player object
+        Player player;
 
         // wall object
         Wall wall;
@@ -32,12 +30,14 @@ namespace Pong
         protected override void Initialize() 
         {
             /* Initialize the game */
-            playerPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 2);
-            var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+            // initialize player
+            var playerPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 2);
+            player = new Player(playerPosition, 100f);
 
+            // initialize wall
+            var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
             wall = new Wall(wallPosition);
 
-            playerSpeed = 100f;
             background_color = new Color(39, 79, 195);
 
             base.Initialize();
@@ -51,7 +51,8 @@ namespace Pong
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // Load your game content here
-            playerTexture = Content.Load<Texture2D>("player");
+            var playerTexture = Content.Load<Texture2D>("player");
+            player.setTexture(playerTexture);
 
             // Load your game content here
             var wallTexture = Content.Load<Texture2D>("wall");
@@ -66,7 +67,7 @@ namespace Pong
 
             // TODO: Add your update logic here
             PlayerBoundaries();
-            PlayerObjectCollision(wall.Position, wall.Texture);
+            PlayerObjectCollision(wall.Position, wall.getTexture());
             Keybindings(gameTime);
 
             base.Update(gameTime);
@@ -82,17 +83,17 @@ namespace Pong
 
             // player
             _spriteBatch.Draw(
-                playerTexture, playerPosition, null,
+                player.getTexture(), player.Position, null,
                 Color.White, 0f,
-                new Vector2(playerTexture.Width / 2, playerTexture.Height / 2),
+                new Vector2(player.getTextureWidth() / 2, player.getTextureHeight() / 2),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
             // wall
             _spriteBatch.Draw(
-                wall.Texture, wall.Position, null,
+                wall.getTexture(), wall.Position, null,
                 Color.White, 0f,
-                new Vector2(wall.Texture.Width / 2, wall.Texture.Height / 2),
+                new Vector2(wall.getTextureWidth() / 2, wall.getTextureHeight() / 2),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
@@ -104,21 +105,21 @@ namespace Pong
         protected void PlayerBoundaries() 
         {
             /* Player Boundaries */
-            if (playerPosition.X > _graphics.PreferredBackBufferWidth - playerTexture.Width / 2) {
+            if (player.Position.X > _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2) {
                 // Right Boundary
-                playerPosition.X = _graphics.PreferredBackBufferWidth - playerTexture.Width / 2;
+                player.Position.X = _graphics.PreferredBackBufferWidth -  player.getTextureWidth() / 2;
             }
-            else if (playerPosition.X < playerTexture.Width / 2) {
+            else if (player.Position.X < player.getTextureWidth() / 2) {
                 // Left Boundary
-                playerPosition.X = playerTexture.Width / 2;
+                player.Position.X = player.getTextureWidth() / 2;
             }
-            if (playerPosition.Y > _graphics.PreferredBackBufferHeight - playerTexture.Height / 2) {
+            if (player.Position.Y > _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2) {
                 // Top Boundary
-                playerPosition.Y = _graphics.PreferredBackBufferHeight - playerTexture.Height / 2;
+                player.Position.Y = _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2;
             }
-            else if (playerPosition.Y < playerTexture.Height / 2) {
+            else if (player.Position.Y < player.getTextureHeight() / 2) {
                 // Botton Boundary
-                playerPosition.Y = playerTexture.Height / 2;
+                player.Position.Y = player.getTextureHeight() / 2;
             }
         }
 
@@ -127,47 +128,47 @@ namespace Pong
             /* Player Object Collision */
 
             // vertical side
-            var verticalside = playerPosition.Y > (objectPosition.Y - 9 * objectTexture.Height / 10) && 
-                playerPosition.Y < (objectPosition.Y + 9 * objectTexture.Height / 10);
+            var verticalside = player.Position.Y > (objectPosition.Y - 9 * objectTexture.Height / 10) && 
+                player.Position.Y < (objectPosition.Y + 9 * objectTexture.Height / 10);
 
-            var leftsidex = playerPosition.X + playerTexture.Width / 2 > (objectPosition.X - objectTexture.Width / 2) &&
-                playerPosition.X + playerTexture.Width / 2 < (objectPosition.X + objectTexture.Width / 2);
+            var leftsidex = player.Position.X + player.getTextureWidth() / 2 > (objectPosition.X - objectTexture.Width / 2) &&
+                player.Position.X + player.getTextureWidth() / 2 < (objectPosition.X + objectTexture.Width / 2);
 
-            var rightsidex = playerPosition.X - playerTexture.Width / 2  < (objectPosition.X + objectTexture.Width / 2) &&
-                playerPosition.X - playerTexture.Width / 2 > (objectPosition.X - objectTexture.Width / 2);
+            var rightsidex = player.Position.X - player.getTextureWidth() / 2  < (objectPosition.X + objectTexture.Width / 2) &&
+                player.Position.X - player.getTextureWidth() / 2 > (objectPosition.X - objectTexture.Width / 2);
 
             // horizontal side
-            var horizontalside = playerPosition.X > (objectPosition.X - 9 * objectTexture.Width / 10) &&
-                playerPosition.X < (objectPosition.X + 9 * objectTexture.Width / 10);
+            var horizontalside = player.Position.X > (objectPosition.X - 9 * objectTexture.Width / 10) &&
+                player.Position.X < (objectPosition.X + 9 * objectTexture.Width / 10);
 
-            var topsidey = playerPosition.Y + playerTexture.Height / 2 > (objectPosition.Y - objectTexture.Height / 2) &&
-                playerPosition.Y + playerTexture.Height / 2 < (objectPosition.Y + objectTexture.Height / 2);
+            var topsidey = player.Position.Y + player.getTextureHeight() / 2 > (objectPosition.Y - objectTexture.Height / 2) &&
+                player.Position.Y + player.getTextureHeight() / 2 < (objectPosition.Y + objectTexture.Height / 2);
 
-            var bottomsidey = playerPosition.Y - playerTexture.Height / 2 < (objectPosition.Y + objectTexture.Height / 2) &&
-                playerPosition.Y - playerTexture.Height / 2 > (objectPosition.Y - objectTexture.Height / 2);
+            var bottomsidey = player.Position.Y - player.getTextureHeight() / 2 < (objectPosition.Y + objectTexture.Height / 2) &&
+                player.Position.Y - player.getTextureHeight() / 2 > (objectPosition.Y - objectTexture.Height / 2);
 
             if (leftsidex && verticalside) 
             {
                 // left side collision
-                playerPosition.X = objectPosition.X - objectTexture.Width / 2 - playerTexture.Width / 2;
+                player.Position.X = objectPosition.X - objectTexture.Width / 2 -  player.getTextureWidth() / 2;
             }
 
             if (rightsidex && verticalside)
             {
                 // right side collision
-                playerPosition.X = objectPosition.X + objectTexture.Width / 2 + playerTexture.Width / 2;
+                player.Position.X = objectPosition.X + objectTexture.Width / 2 + player.getTextureWidth() / 2;
             }
 
             if (topsidey && horizontalside)
             {
                 // top side collision
-                playerPosition.Y = objectPosition.Y - objectTexture.Height / 2 - playerTexture.Height / 2;
+                player.Position.Y = objectPosition.Y - objectTexture.Height / 2 - player.getTextureHeight() / 2;
             }
 
             if (bottomsidey && horizontalside)
             {
                 // bottom side collision
-                playerPosition.Y = objectPosition.Y + objectTexture.Height / 2 + playerTexture.Height / 2;
+                player.Position.Y = objectPosition.Y + objectTexture.Height / 2 + player.getTextureHeight() / 2;
             }
         }
 
@@ -179,22 +180,22 @@ namespace Pong
             if (kstate.IsKeyDown(Keys.Up))
             {
                 // Move the player up
-                playerPosition.Y -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player.Position.Y -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (kstate.IsKeyDown(Keys.Down))
             {
                 // Move the player down
-                playerPosition.Y += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player.Position.Y += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (kstate.IsKeyDown(Keys.Left))
             {
                 // Move the player left
-                playerPosition.X -= playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player.Position.X -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
             else if (kstate.IsKeyDown(Keys.Right))
             {
                 // Move the player right
-                playerPosition.X += playerSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
+                player.Position.X +=  player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
         }
     }
