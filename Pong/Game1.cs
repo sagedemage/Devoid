@@ -7,11 +7,15 @@ namespace Pong
 {
     public class Game1 : Game {
         /* Game */
+
+        // player
         Texture2D playerTexture;
-        Texture2D wallTexture;
-        Vector2 wallPosition;
         Vector2 playerPosition;
         float playerSpeed;
+
+        // wall object
+        Wall wall;
+        
         // background color
         Color background_color;
 
@@ -29,7 +33,10 @@ namespace Pong
         {
             /* Initialize the game */
             playerPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 2);
-            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+            var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+
+            wall = new Wall(wallPosition);
+
             playerSpeed = 100f;
             background_color = new Color(39, 79, 195);
 
@@ -47,7 +54,8 @@ namespace Pong
             playerTexture = Content.Load<Texture2D>("player");
 
             // Load your game content here
-            wallTexture = Content.Load<Texture2D>("wall");
+            var wallTexture = Content.Load<Texture2D>("wall");
+            wall.setTexture(wallTexture);
         }
 
         protected override void Update(GameTime gameTime) 
@@ -58,7 +66,7 @@ namespace Pong
 
             // TODO: Add your update logic here
             PlayerBoundaries();
-            PlayerObjectCollision(wallPosition, wallTexture);
+            PlayerObjectCollision(wall.Position, wall.Texture);
             Keybindings(gameTime);
 
             base.Update(gameTime);
@@ -82,9 +90,9 @@ namespace Pong
 
             // wall
             _spriteBatch.Draw(
-                wallTexture, wallPosition, null,
+                wall.Texture, wall.Position, null,
                 Color.White, 0f,
-                new Vector2(wallTexture.Width / 2, wallTexture.Height / 2),
+                new Vector2(wall.Texture.Width / 2, wall.Texture.Height / 2),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
