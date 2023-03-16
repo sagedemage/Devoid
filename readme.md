@@ -9,3 +9,9 @@ it is way too bare bones for my liking and I am not a fan of using C/C++.
 1. [Install Visual Studio](https://visualstudio.microsoft.com/vs/)
 2. Install Monogame extension for Visual Studio 2022 \
 	1. Go to "Extensions -> Manage Extensions" -> Search "monogame"
+
+## Run the game
+The command to run the program wihtout Visual Studio. This is mean't for running on Linux.
+```
+dotnet run
+```
