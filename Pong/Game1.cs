@@ -11,7 +11,9 @@ namespace Pong
         Player player;
 
         // wall object
-        Wall wall;
+        Wall wall1;
+        Wall wall2;
+        Wall wall3;
         
         // background color
         Color background_color;
@@ -35,7 +37,13 @@ namespace Pong
 
             // initialize wall
             var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 4);
-            wall = new Wall(wallPosition);
+            wall1 = new Wall(wallPosition);
+
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 4);
+            wall2 = new Wall(wallPosition);
+
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth * 3/4, _graphics.PreferredBackBufferHeight / 4);
+            wall3 = new Wall(wallPosition);
 
             background_color = new Color(39, 79, 195);
 
@@ -55,7 +63,9 @@ namespace Pong
 
             // Load wall content here
             var wallTexture = Content.Load<Texture2D>("wall");
-            wall.setTexture(wallTexture);
+            wall1.setTexture(wallTexture);
+            wall2.setTexture(wallTexture);
+            wall3.setTexture(wallTexture);
         }
 
         protected override void Update(GameTime gameTime) 
@@ -66,7 +76,9 @@ namespace Pong
 
             // TODO: Add your update logic here
             PlayerBoundaries();
-            PlayerObjectCollision(wall.Position, wall.getTexture());
+            PlayerObjectCollision(wall1.Position, wall1.getTexture());
+            PlayerObjectCollision(wall2.Position, wall2.getTexture());
+            PlayerObjectCollision(wall3.Position, wall3.getTexture());
             Keybindings(gameTime);
 
             base.Update(gameTime);
@@ -88,11 +100,27 @@ namespace Pong
                 Vector2.One, SpriteEffects.None, 0f
             );
 
-            // wall
+            // wall 1
             _spriteBatch.Draw(
-                wall.getTexture(), wall.Position, null,
+                wall1.getTexture(), wall1.Position, null,
                 Color.White, 0f,
-                wall.getScale(),
+                wall1.getScale(),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall 2
+            _spriteBatch.Draw(
+                wall2.getTexture(), wall2.Position, null,
+                Color.White, 0f,
+                wall2.getScale(),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall 2
+            _spriteBatch.Draw(
+                wall3.getTexture(), wall3.Position, null,
+                Color.White, 0f,
+                wall3.getScale(),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
