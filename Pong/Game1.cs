@@ -138,7 +138,7 @@ namespace Pong
             var object_bottom_side = objectPosition.Y + objectTexture.Height / 2;
 
             // vertical side
-            var verticalside = player_top_side < object_top_side && player_bottom_side > object_bottom_side;
+            var verticalside = player_bottom_side > object_top_side && player_top_side < object_bottom_side;
 
             /* Right and Left Sides */
             // player vertical sides
@@ -161,7 +161,7 @@ namespace Pong
             var topsidey = player_bottom_side > object_top_side && player_bottom_side < object_bottom_side;
             var bottomsidey = player_top_side < object_bottom_side && player_top_side > object_top_side;
 
-            /*if (leftsidex && verticalside)
+            if (leftsidex && verticalside)
             {
                 // left side collision
                 player.Position.X = objectPosition.X - objectTexture.Width / 2 -  player.getTextureWidth() / 2;
@@ -171,9 +171,9 @@ namespace Pong
             {
                 // right side collision
                 player.Position.X = objectPosition.X + objectTexture.Width / 2 + player.getTextureWidth() / 2;
-            }*/
+            }
 
-            if (topsidey && horizontalside)
+            /*if (topsidey && horizontalside)
             {
                 // top side collision
                 player.Position.Y = objectPosition.Y - objectTexture.Height / 2 - player.getTextureHeight() / 2;
@@ -183,7 +183,7 @@ namespace Pong
             {
                 // bottom side collision
                 player.Position.Y = objectPosition.Y + objectTexture.Height / 2 + player.getTextureHeight() / 2;
-            }
+            }*/
         }
 
         private void Keybindings(GameTime gameTime) 
