@@ -14,6 +14,9 @@ namespace Pong
         Wall wall1;
         Wall wall2;
         Wall wall3;
+        Wall wall4;
+        Wall wall5;
+        Wall wall6;
         
         // background color
         Color background_color;
@@ -45,6 +48,15 @@ namespace Pong
             wallPosition = new Vector2(_graphics.PreferredBackBufferWidth * 3/4, _graphics.PreferredBackBufferHeight / 4);
             wall3 = new Wall(wallPosition);
 
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight * 3/4);
+            wall4 = new Wall(wallPosition);
+
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight * 3/4);
+            wall5 = new Wall(wallPosition);
+
+            wallPosition = new Vector2(_graphics.PreferredBackBufferWidth * 3/4, _graphics.PreferredBackBufferHeight * 3/4);
+            wall6 = new Wall(wallPosition);
+
             background_color = new Color(39, 79, 195);
 
             base.Initialize();
@@ -66,6 +78,9 @@ namespace Pong
             wall1.setTexture(wallTexture);
             wall2.setTexture(wallTexture);
             wall3.setTexture(wallTexture);
+            wall4.setTexture(wallTexture);
+            wall5.setTexture(wallTexture);
+            wall6.setTexture(wallTexture);
         }
 
         protected override void Update(GameTime gameTime) 
@@ -75,10 +90,18 @@ namespace Pong
                 Exit();
 
             // TODO: Add your update logic here
+            // Player Boundary
             PlayerBoundaries();
+
+            // Player and Object Collision
             PlayerObjectCollision(wall1.Position, wall1.getTexture());
             PlayerObjectCollision(wall2.Position, wall2.getTexture());
             PlayerObjectCollision(wall3.Position, wall3.getTexture());
+            PlayerObjectCollision(wall4.Position, wall4.getTexture());
+            PlayerObjectCollision(wall5.Position, wall5.getTexture());
+            PlayerObjectCollision(wall6.Position, wall6.getTexture());
+
+            // set player keybindings
             Keybindings(gameTime);
 
             base.Update(gameTime);
@@ -116,11 +139,35 @@ namespace Pong
                 Vector2.One, SpriteEffects.None, 0f
             );
 
-            // wall 2
+            // wall 3
             _spriteBatch.Draw(
                 wall3.getTexture(), wall3.Position, null,
                 Color.White, 0f,
                 wall3.getScale(),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall 4
+            _spriteBatch.Draw(
+                wall4.getTexture(), wall4.Position, null,
+                Color.White, 0f,
+                wall4.getScale(),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall 5
+            _spriteBatch.Draw(
+                wall5.getTexture(), wall5.Position, null,
+                Color.White, 0f,
+                wall5.getScale(),
+                Vector2.One, SpriteEffects.None, 0f
+            );
+
+            // wall 6
+            _spriteBatch.Draw(
+                wall6.getTexture(), wall6.Position, null,
+                Color.White, 0f,
+                wall6.getScale(),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
