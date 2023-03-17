@@ -32,5 +32,16 @@ namespace Pong
         {
             return this.Texture.Height;
         }
+
+        public Vector2 getScale()
+        {
+            Vector2 Scale = new Vector2();
+
+            if (this.Texture != null)
+            {
+                Scale = new Vector2(getTextureWidth() / 2, getTextureHeight() / 2);
+            }
+            return Scale;
+        }
     }
 }
