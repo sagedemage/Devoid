@@ -36,7 +36,7 @@ namespace Pong
             player = new Player(playerPosition, 100f);
 
             // initialize wall
-            var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 2);
+            var wallPosition = new Vector2(_graphics.PreferredBackBufferWidth / 4, _graphics.PreferredBackBufferHeight / 4);
             wall = new Wall(wallPosition);
 
             background_color = new Color(39, 79, 195);
@@ -51,11 +51,11 @@ namespace Pong
             // Create a new SpriteBatch, which can be used to draw textures.
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load your game content here
+            // Load player content here
             var playerTexture = Content.Load<Texture2D>("player");
             player.setTexture(playerTexture);
 
-            // Load your game content here
+            // Load wall content here
             var wallTexture = Content.Load<Texture2D>("wall");
             wall.setTexture(wallTexture);
         }
@@ -86,7 +86,7 @@ namespace Pong
             _spriteBatch.Draw(
                 player.getTexture(), player.Position, null,
                 Color.White, 0f,
-                new Vector2(player.getTextureWidth() / 2, player.getTextureHeight() / 2),
+                player.getScale(),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
@@ -94,7 +94,7 @@ namespace Pong
             _spriteBatch.Draw(
                 wall.getTexture(), wall.Position, null,
                 Color.White, 0f,
-                new Vector2(wall.getTextureWidth() / 2, wall.getTextureHeight() / 2),
+                wall.getScale(),
                 Vector2.One, SpriteEffects.None, 0f
             );
 
