@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
+using System.Diagnostics;
 
 namespace Pong
 {
@@ -127,25 +128,38 @@ namespace Pong
         {
             /* Player Object Collision */
 
+            /* Top and Bottom Sides */
+            // player horizontal sides
+            var player_top_side = player.Position.Y - player.getTextureHeight() / 2;
+            var player_bottom_side = player.Position.Y + player.getTextureHeight() / 2;
+
+            // object horizontal sides
+            var object_bottom_side = objectPosition.Y - objectTexture.Height / 2;
+            var object_top_side = objectPosition.Y + objectTexture.Height / 2;
+
             // vertical side
-            var verticalside = player.Position.Y > (objectPosition.Y - 9 * objectTexture.Height / 10) && 
-                player.Position.Y < (objectPosition.Y + 9 * objectTexture.Height / 10);
+            var verticalside = player_top_side < object_top_side && player_bottom_side > object_bottom_side;
 
-            var leftsidex = player.Position.X + player.getTextureWidth() / 2 > (objectPosition.X - objectTexture.Width / 2) &&
-                player.Position.X + player.getTextureWidth() / 2 < (objectPosition.X + objectTexture.Width / 2);
+            /* Right and Left Sides */
+            // player vertical sides
+            var player_left_side = player.Position.X - player.getTextureWidth() / 2;
+            var player_right_side = player.Position.X + player.getTextureWidth() / 2;
 
-            var rightsidex = player.Position.X - player.getTextureWidth() / 2  < (objectPosition.X + objectTexture.Width / 2) &&
-                player.Position.X - player.getTextureWidth() / 2 > (objectPosition.X - objectTexture.Width / 2);
+            // object vertical sides
+            var object_left_side = objectPosition.X - objectTexture.Width / 2;
+            var object_right_side = objectPosition.X + objectTexture.Width / 2;
 
             // horizontal side
-            var horizontalside = player.Position.X > (objectPosition.X - 9 * objectTexture.Width / 10) &&
-                player.Position.X < (objectPosition.X + 9 * objectTexture.Width / 10);
+            var horizontalside = player_left_side > object_left_side && player_right_side < object_right_side;
 
-            var topsidey = player.Position.Y + player.getTextureHeight() / 2 > (objectPosition.Y - objectTexture.Height / 2) &&
-                player.Position.Y + player.getTextureHeight() / 2 < (objectPosition.Y + objectTexture.Height / 2);
+            /* Collision Detection */
+            // does player collide with object's right or left side
+            var leftsidex = player_right_side > object_left_side && player_right_side < object_right_side;
+            var rightsidex =  player_left_side < object_right_side && player_left_side > object_left_side;
 
-            var bottomsidey = player.Position.Y - player.getTextureHeight() / 2 < (objectPosition.Y + objectTexture.Height / 2) &&
-                player.Position.Y - player.getTextureHeight() / 2 > (objectPosition.Y - objectTexture.Height / 2);
+            // does player collisde with object's top or left side
+            var topsidey = player_bottom_side > object_bottom_side && player_bottom_side < object_top_side;
+            var bottomsidey = player_top_side < object_top_side && player_top_side > object_bottom_side;
 
             if (leftsidex && verticalside) 
             {
@@ -153,19 +167,19 @@ namespace Pong
                 player.Position.X = objectPosition.X - objectTexture.Width / 2 -  player.getTextureWidth() / 2;
             }
 
-            if (rightsidex && verticalside)
+            else if (rightsidex && verticalside)
             {
                 // right side collision
                 player.Position.X = objectPosition.X + objectTexture.Width / 2 + player.getTextureWidth() / 2;
             }
 
-            if (topsidey && horizontalside)
+            else if (topsidey && horizontalside)
             {
                 // top side collision
                 player.Position.Y = objectPosition.Y - objectTexture.Height / 2 - player.getTextureHeight() / 2;
             }
 
-            if (bottomsidey && horizontalside)
+            else if (bottomsidey && horizontalside)
             {
                 // bottom side collision
                 player.Position.Y = objectPosition.Y + objectTexture.Height / 2 + player.getTextureHeight() / 2;
