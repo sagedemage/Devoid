@@ -127,7 +127,6 @@ namespace Pong
         private void PlayerObjectCollision(Vector2 objectPosition, Texture2D objectTexture) 
         {
             /* Player Object Collision */
-
             var vertex_gap = 2;
 
             /* Top and Bottom Sides */
