@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 
 namespace Pong
 {
@@ -23,6 +24,7 @@ namespace Pong
 
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
+        private Song _song;
 
         public Game1(){
             /* Create Game Object */
@@ -81,6 +83,12 @@ namespace Pong
             wall4.setTexture(wallTexture);
             wall5.setTexture(wallTexture);
             wall6.setTexture(wallTexture);
+
+            // Music
+            _song = Content.Load<Song>("nature");
+            MediaPlayer.Play(_song);
+            MediaPlayer.Volume = 0.5f;
+            MediaPlayer.IsRepeating = true;
         }
 
         protected override void Update(GameTime gameTime) 
