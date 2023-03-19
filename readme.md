@@ -11,7 +11,17 @@ it is way too bare bones for my liking and I am not a fan of using C/C++.
 	1. Go to "Extensions -> Manage Extensions" -> Search "monogame"
 
 ## Run the game
-The command to run the program without Visual Studio. This is mean't for running on Linux.
+The command to run the program without Visual Studio.
 ```
 dotnet run --project Devoid
+```
+
+For Windows, you can use the batch file to run the game.
+```
+.\run.bat
+```
+
+For Linux, you can use the shell script to run the game.
+```
+./run.sh
 ```
