@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace Pong
+namespace Devoid
 {
     public class Wall
     {
@@ -10,34 +10,34 @@ namespace Pong
 
         public Wall(Vector2 wallPostion)
         {
-            this.Position = wallPostion;
+            Position = wallPostion;
         }
 
         public void setTexture(Texture2D wallTexture)
         {
-            this.Texture = wallTexture;
+            Texture = wallTexture;
         }
 
         public Texture2D getTexture()
         {
-            return this.Texture;
+            return Texture;
         }
 
         public int getTextureWidth()
         {
-            return this.Texture.Width;
+            return Texture.Width;
         }
 
         public int getTextureHeight()
         {
-            return this.Texture.Height;
+            return Texture.Height;
         }
 
         public Vector2 getScale()
         {
             Vector2 Scale = new Vector2();
 
-            if (this.Texture != null)
+            if (Texture != null)
             {
                 Scale = new Vector2(getTextureWidth() / 2, getTextureHeight() / 2);
             }
