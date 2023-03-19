@@ -10,7 +10,7 @@ namespace Devoid
         /* Game */
 
         // player object
-        Player player;
+        public Player player;
 
         // wall object
         Wall wall1;
@@ -186,7 +186,7 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        protected void PlayerBoundaries()
+        public void PlayerBoundaries()
         {
             /* Player Boundaries */
             if (player.Position.X > _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
