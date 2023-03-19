@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Pong
+namespace Devoid
 {
     public class Player
     {
@@ -9,42 +9,42 @@ namespace Pong
         public Vector2 Position;
         private float Speed;
 
-        public Player(Vector2 playerPosition, float playerSpeed) 
+        public Player(Vector2 playerPosition, float playerSpeed)
         {
-            this.Position = playerPosition;
-            this.Speed = playerSpeed;
+            Position = playerPosition;
+            Speed = playerSpeed;
         }
 
         public void setTexture(Texture2D playerTexture)
         {
-            this.Texture = playerTexture;
+            Texture = playerTexture;
         }
 
         public Texture2D getTexture()
         {
-            return this.Texture;
+            return Texture;
         }
 
         public float getSpeed()
         {
-            return this.Speed;
+            return Speed;
         }
 
         public int getTextureWidth()
         {
-            return this.Texture.Width;
+            return Texture.Width;
         }
 
         public int getTextureHeight()
         {
-            return this.Texture.Height;
+            return Texture.Height;
         }
 
         public Vector2 getScale()
         {
             Vector2 Scale = new Vector2();
 
-            if (this.Texture != null)
+            if (Texture != null)
             {
                 Scale = new Vector2(getTextureWidth() / 2, getTextureHeight() / 2);
             }

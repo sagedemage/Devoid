@@ -1,2 +1,2 @@
 @ECHO OFF
-dotnet run --project Pong
+dotnet run --project Devoid
