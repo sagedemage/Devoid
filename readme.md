@@ -1,4 +1,4 @@
-# Simple 2D Game
+# Devoid
 I do not know what kind of game I want to make. However, it will be pretty simple.
 I want to emulate a old school top down 2D game. A Link to the Past is the old school game I think of.
 I really do not play much video games anymore. But I thought I would be fun to create a 
@@ -13,5 +13,5 @@ it is way too bare bones for my liking and I am not a fan of using C/C++.
 ## Run the game
 The command to run the program wihtout Visual Studio. This is mean't for running on Linux.
 ```
-dotnet run
+dotnet run --project Devoid
 ```
