@@ -6,9 +6,13 @@ another 2D by using a framework like MonoGame. I do not want to use SDL2 anymore
 it is way too bare bones for my liking and I am not a fan of using C/C++.
 
 ## Setup
-1. [Install Visual Studio](https://visualstudio.microsoft.com/vs/)
-2. Install Monogame extension for Visual Studio 2022 \
-	1. Go to "Extensions -> Manage Extensions" -> Search "monogame"
+On Windows: 
+1. install [Visual Studio](https://visualstudio.microsoft.com/vs/)
+
+On Linux: 
+1. install [.NET](https://dotnet.microsoft.com/en-us/download)
+2. install [Visual Studio Code](https://code.visualstudio.com/?wt.mc_id=vscom_downloads) (Optional)
+
 
 ## Run the game
 The command to run the program without Visual Studio.
