@@ -365,3 +365,5 @@ FodyWeavers.xsd
 # Krita files
 *.kra
 
+# MuseScore files
+*.mscz
