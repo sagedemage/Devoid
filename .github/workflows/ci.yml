@@ -17,6 +17,8 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
+      - name: Go to Devoid Directory
+        run: cd Devoid
       - name: Install dependencies
         run: dotnet add package Microsoft.NET.Test.Sdk --version 17.5.0
         run: dotnet add package MonoGame.Content.Builder.Task --version 3.8.1.303
