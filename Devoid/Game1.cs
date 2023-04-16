@@ -218,20 +218,28 @@ namespace Devoid
 
             /* Position Detection */
             // does the player y position is within the wall's y position
-            var wall_vertical_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap && player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap;
+            var wall_vertical_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap && 
+                player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap;
 
             // does the player x position is within the wall's x position
-            var wall_horizontal_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap && player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap;
+            var wall_horizontal_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap && 
+                player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap;
 
             // is player's right side between wall's left side and wall's right side
-            var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && player.getRightSideXPosition() < wall.getRightSideXPosition();
+            var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && 
+                player.getRightSideXPosition() < wall.getRightSideXPosition();
 
             // is player's left side between wall's left side and wall's right side
-            var wall_right_side = player.getLeftSideXPosition() < wall.getRightSideXPosition() && player.getLeftSideXPosition() > wall.getLeftSideXPosition();
+            var wall_right_side = player.getLeftSideXPosition() < wall.getRightSideXPosition() && 
+                player.getLeftSideXPosition() > wall.getLeftSideXPosition();
 
-            // does player collisde with wall's top or left side
-            var topsidey = player.getBottomSideYPosition() > wall.getTopSideYPosition() && player.getBottomSideYPosition() < wall.getBottomSideYPosition();
-            var bottomsidey = player.getTopSideYPosition() < wall.getBottomSideYPosition() && player.getTopSideYPosition() > wall.getTopSideYPosition();
+            // is player above wall's top side
+            var topsidey = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
+                player.getBottomSideYPosition() < wall.getBottomSideYPosition();
+
+            // is the player below the wall's bottom side
+            var bottomsidey = player.getTopSideYPosition() < wall.getBottomSideYPosition() && 
+                player.getTopSideYPosition() > wall.getTopSideYPosition();
 
             /* Collision Detection */
             if (wall_left_side && wall_vertical_side)
