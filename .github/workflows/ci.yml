@@ -1,24 +1,25 @@
-name: Unit Testing
+name: .NET
 
 on:
+  push:
+    branches: [ $default-branch ]
   pull_request:
-    branches:
-      - 'master'
-    push:
-      branches:
-        - "*"
+    branches: [ $default-branch ]
 
 jobs:
-  tests:
-    runs-on: windows-latest
+  build:
+
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.0.x'
-      - name: Install dependencies
-        run: dotnet restore
-      - name: Build
-        run: dotnet build
-      - name: Test
-        run: dotnet test
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
