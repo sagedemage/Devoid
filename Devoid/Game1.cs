@@ -211,9 +211,9 @@ namespace Devoid
             }
         }
 
-        private void PlayerObjectCollision(Wall wall)
+        private void PlayerWallCollision(Wall wall)
         {
-            /* Player Object Collision */
+            /* Player and Wall Collision */
             var vertex_gap = 2;
 
             /* Position Detection */
@@ -259,7 +259,7 @@ namespace Devoid
             }
             else if (bottomsidey && wall_horizontal_side)
             {
-                // bottom side collision
+                // player collides with wall's bottom side
                 player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
             }
         }
