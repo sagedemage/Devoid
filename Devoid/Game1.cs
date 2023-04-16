@@ -104,12 +104,12 @@ namespace Devoid
             PlayerBoundaries();
 
             // Player and Object Collision
-            PlayerObjectCollision(wall1);
-            PlayerObjectCollision(wall2);
-            PlayerObjectCollision(wall3);
-            PlayerObjectCollision(wall4);
-            PlayerObjectCollision(wall5);
-            PlayerObjectCollision(wall6);
+            PlayerWallCollision(wall1);
+            PlayerWallCollision(wall2);
+            PlayerWallCollision(wall3);
+            PlayerWallCollision(wall4);
+            PlayerWallCollision(wall5);
+            PlayerWallCollision(wall6);
 
             // set player keybindings
             Keybindings(gameTime);
