@@ -104,12 +104,12 @@ namespace Devoid
             PlayerBoundaries();
 
             // Player and Object Collision
-            PlayerObjectCollision(wall1.Position, wall1.getTexture());
-            PlayerObjectCollision(wall2.Position, wall2.getTexture());
-            PlayerObjectCollision(wall3.Position, wall3.getTexture());
-            PlayerObjectCollision(wall4.Position, wall4.getTexture());
-            PlayerObjectCollision(wall5.Position, wall5.getTexture());
-            PlayerObjectCollision(wall6.Position, wall6.getTexture());
+            PlayerObjectCollision(wall1);
+            PlayerObjectCollision(wall2);
+            PlayerObjectCollision(wall3);
+            PlayerObjectCollision(wall4);
+            PlayerObjectCollision(wall5);
+            PlayerObjectCollision(wall6);
 
             // set player keybindings
             Keybindings(gameTime);
@@ -211,61 +211,48 @@ namespace Devoid
             }
         }
 
-        private void PlayerObjectCollision(Vector2 objectPosition, Texture2D objectTexture)
+        private void PlayerObjectCollision(Wall wall)
         {
             /* Player Object Collision */
             var vertex_gap = 2;
 
-            /* Top and Bottom Sides */
-            // player horizontal sides
-            var player_top_side = player.Position.Y - player.getTextureHeight() / 2;
-            var player_bottom_side = player.Position.Y + player.getTextureHeight() / 2;
+            /* Position Detection */
+            // does the player y position is within the wall's y position
+            var wall_vertical_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap && player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap;
 
-            // object horizontal sides
-            var object_top_side = objectPosition.Y - objectTexture.Height / 2;
-            var object_bottom_side = objectPosition.Y + objectTexture.Height / 2;
+            // does the player x position is within the wall's x position
+            var wall_horizontal_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap && player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap;
 
-            // vertical side
-            var verticalside = player_bottom_side > object_top_side + vertex_gap && player_top_side < object_bottom_side - vertex_gap;
+            // is player's right side between wall's left side and wall's right side
+            var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && player.getRightSideXPosition() < wall.getRightSideXPosition();
 
-            // object vertical sides
-            var object_left_side = objectPosition.X - objectTexture.Width / 2;
-            var object_right_side = objectPosition.X + objectTexture.Width / 2;
+            // is player's left side between wall's left side and wall's right side
+            var wall_right_side = player.getLeftSideXPosition() < wall.getRightSideXPosition() && player.getLeftSideXPosition() > wall.getLeftSideXPosition();
 
-            // horizontal side
-            var horizontalside = player.getRightSideXPosition() > object_left_side + vertex_gap && player.getLeftSideXPosition() < object_right_side - vertex_gap;
+            // does player collisde with wall's top or left side
+            var topsidey = player.getBottomSideYPosition() > wall.getTopSideYPosition() && player.getBottomSideYPosition() < wall.getBottomSideYPosition();
+            var bottomsidey = player.getTopSideYPosition() < wall.getBottomSideYPosition() && player.getTopSideYPosition() > wall.getTopSideYPosition();
 
             /* Collision Detection */
-            // does player collide with object's right or left side
-            var leftsidex = player.getRightSideXPosition() > object_left_side && player.getRightSideXPosition() < object_right_side;
-            var rightsidex = player.getLeftSideXPosition() < object_right_side && player.getLeftSideXPosition() > object_left_side;
-
-            // does player collisde with object's top or left side
-            var topsidey = player_bottom_side > object_top_side && player_bottom_side < object_bottom_side;
-            var bottomsidey = player_top_side < object_bottom_side && player_top_side > object_top_side;
-
-            if (leftsidex && verticalside)
+            if (wall_left_side && wall_vertical_side)
             {
                 // left side collision
-                player.Position.X = objectPosition.X - objectTexture.Width / 2 - player.getTextureWidth() / 2;
+                player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
             }
-
-            else if (rightsidex && verticalside)
+            else if (wall_right_side && wall_vertical_side)
             {
                 // right side collision
-                player.Position.X = objectPosition.X + objectTexture.Width / 2 + player.getTextureWidth() / 2;
+                player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
             }
-
-            else if (topsidey && horizontalside)
+            else if (topsidey && wall_horizontal_side)
             {
                 // top side collision
-                player.Position.Y = objectPosition.Y - objectTexture.Height / 2 - player.getTextureHeight() / 2;
+                player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
             }
-
-            else if (bottomsidey && horizontalside)
+            else if (bottomsidey && wall_horizontal_side)
             {
                 // bottom side collision
-                player.Position.Y = objectPosition.Y + objectTexture.Height / 2 + player.getTextureHeight() / 2;
+                player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
             }
         }
 
