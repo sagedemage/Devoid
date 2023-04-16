@@ -228,22 +228,17 @@ namespace Devoid
             // vertical side
             var verticalside = player_bottom_side > object_top_side + vertex_gap && player_top_side < object_bottom_side - vertex_gap;
 
-            /* Right and Left Sides */
-            // player vertical sides
-            var player_left_side = player.Position.X - player.getTextureWidth() / 2;
-            var player_right_side = player.Position.X + player.getTextureWidth() / 2;
-
             // object vertical sides
             var object_left_side = objectPosition.X - objectTexture.Width / 2;
             var object_right_side = objectPosition.X + objectTexture.Width / 2;
 
             // horizontal side
-            var horizontalside = player_right_side > object_left_side + vertex_gap && player_left_side < object_right_side - vertex_gap;
+            var horizontalside = player.getRightSideXPosition() > object_left_side + vertex_gap && player.getLeftSideXPosition() < object_right_side - vertex_gap;
 
             /* Collision Detection */
             // does player collide with object's right or left side
-            var leftsidex = player_right_side > object_left_side && player_right_side < object_right_side;
-            var rightsidex = player_left_side < object_right_side && player_left_side > object_left_side;
+            var leftsidex = player.getRightSideXPosition() > object_left_side && player.getRightSideXPosition() < object_right_side;
+            var rightsidex = player.getLeftSideXPosition() < object_right_side && player.getLeftSideXPosition() > object_left_side;
 
             // does player collisde with object's top or left side
             var topsidey = player_bottom_side > object_top_side && player_bottom_side < object_bottom_side;
