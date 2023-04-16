@@ -244,17 +244,17 @@ namespace Devoid
             /* Collision Detection */
             if (wall_left_side && wall_vertical_side)
             {
-                // left side collision
+                // player collides with wall's left side
                 player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
             }
             else if (wall_right_side && wall_vertical_side)
             {
-                // right side collision
+                // player collides with wall's right side
                 player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
             }
             else if (topsidey && wall_horizontal_side)
             {
-                // top side collision
+                // player collides with wall's top side
                 player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
             }
             else if (bottomsidey && wall_horizontal_side)
