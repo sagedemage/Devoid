@@ -46,7 +46,7 @@ namespace Devoid
 
             if (Texture != null)
             {
-                Scale = new Vector2(getTextureWidth() / 2, getTextureHeight() / 2);
+                Scale = new Vector2(Texture.Width / 2, Texture.Height / 2);
             }
             return Scale;
         }
