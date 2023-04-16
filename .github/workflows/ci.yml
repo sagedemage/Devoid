@@ -9,26 +9,16 @@ on:
         - "*"
 
 jobs:
-  unit-testing:
+  tests:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
-      - name: Go to Devoid Directory
-        run: cd Devoid
       - name: Install dependencies
-        run: dotnet add package Microsoft.NET.Test.Sdk --version 17.5.0
-        run: dotnet add package MonoGame.Content.Builder.Task --version 3.8.1.303
-        run: dotnet add package MonoGame.Framework.DesktopGL --version 3.8.1.303
-        run: dotnet add package MSTest.TestFramework --version 3.0.2
-        run: dotnet add package MSTest.TestAdapter --version 3.0.2
-        run: dotnet add package NUnit --version 3.13.3
-
-        # dotnet restore
+        run: dotnet restore
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
+        run: dotnet test
