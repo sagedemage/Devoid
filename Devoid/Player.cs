@@ -51,5 +51,23 @@ namespace Devoid
             return Scale;
         }
 
+        public float getTopSideYPosition()
+        {
+            return Position.Y - Texture.Height / 2;
+        }
+
+        public float getBottomSideYPosition()
+        {
+            return Position.Y + Texture.Height / 2;
+        }
+        public float getRightSideXPosition()
+        {
+            return Position.X + Texture.Width / 2;
+        }
+
+        public float getLeftSideXPosition()
+        {
+            return Position.X - Texture.Width / 2;
+        }
     }
 }
