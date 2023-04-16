@@ -39,9 +39,27 @@ namespace Devoid
 
             if (Texture != null)
             {
-                Scale = new Vector2(getTextureWidth() / 2, getTextureHeight() / 2);
+                Scale = new Vector2(Texture.Width / 2, Texture.Height / 2);
             }
             return Scale;
+        }
+        public float getTopSideYPosition()
+        {
+            return Position.Y - Texture.Height / 2;
+        }
+
+        public float getBottomSideYPosition()
+        {
+            return Position.Y + Texture.Height / 2;
+        }
+        public float getRightSideXPosition()
+        {
+            return Position.X + Texture.Width / 2;
+        }
+
+        public float getLeftSideXPosition()
+        {
+            return Position.X - Texture.Width / 2;
         }
     }
 }
