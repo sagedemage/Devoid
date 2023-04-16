@@ -1,4 +1,4 @@
-name: dotnet package
+name: Unit Testing
 
 on:
   pull_request:
@@ -9,19 +9,14 @@ on:
         - "*"
 
 jobs:
-  build:
-
+  unit-testing:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet-version: [ '7.0.x' ]
-
     steps:
       - uses: actions/checkout@v3
-      - name: Setup .NET Core SDK ${{ matrix.dotnet-version }}
+      - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: ${{ matrix.dotnet-version }}
+          dotnet-version: '7.0.x'
       - name: Install dependencies
         run: dotnet restore
       - name: Build
