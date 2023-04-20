@@ -1,6 +1,4 @@
 import os
-import subprocess
-import re
 
 file1 = open("test_output/unit_test_output.txt", "r")
 file2 = open("test_output/result.txt", "w")

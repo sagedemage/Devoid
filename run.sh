@@ -14,7 +14,7 @@ dotnet build --configuration Release --no-restore
 dotnet test --no-restore --verbosity normal > test_output/unit_test_output.txt
 
 # Run Python Script
-python3 run.py
+python3 record_unit_test.py 
 
 # Exit the script if the unit test failed
 file=$(cat test_output/result.txt)
