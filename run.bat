@@ -1,9 +1,20 @@
 @ECHO OFF
-:: Build the Program
+:: Build program
 dotnet build --configuration Release --no-restore
 
-:: Test the Program
-dotnet test --no-restore --verbosity normal
+:: Create directory if it does not exist
+if not exist test_output\ (
+    md test_output
+)
 
-:: Run the Program
+:: Run unit tests
+dotnet test --no-restore --verbosity normal > test_output/unit_test_output.txt
+
+:: Run Python Script
+python record_unit_test.py
+
+:: Exit the script if the unit test failed
+FOR /F %%i IN (test_output/result.txt) DO (if "%%i" == "Failed" (exit))
+
+:: Run the Porgram
 dotnet run --project Devoid
