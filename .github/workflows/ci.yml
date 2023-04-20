@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-bionic
     strategy:
       matrix:
         dotnet-version: ['7.0.x']
