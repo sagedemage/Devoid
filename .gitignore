@@ -367,3 +367,6 @@ FodyWeavers.xsd
 
 # MuseScore files
 *.mscz
+
+# Ignore unit test output folder
+test_output/
