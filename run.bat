@@ -1,9 +1,11 @@
 @ECHO OFF
-:: Build the Program
 dotnet build --configuration Release --no-restore
 
-:: Test the Program
-dotnet test --no-restore --verbosity normal
+dotnet test --no-restore --verbosity normal > unit_test_output.txt
 
-:: Run the Program
+:: Run Python Script
+python run.py
+
+FOR /F %%i IN (result.txt) DO (if "%%i" == "Failed" (exit))
+
 dotnet run --project Devoid
