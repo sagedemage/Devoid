@@ -2,8 +2,10 @@
 :: Build program
 dotnet build --configuration Release --no-restore
 
-:: Create directory
-md test_output
+:: Create directory if it does not exist
+if not exist test_output\ (
+    md test_output
+)
 
 :: Run unit tests
 dotnet test --no-restore --verbosity normal > test_output/unit_test_output.txt
