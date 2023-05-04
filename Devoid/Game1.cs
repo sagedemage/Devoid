@@ -220,7 +220,9 @@ namespace Devoid
             if (player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap &&
                 player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap)
             {
-                /* does the player y position is within the wall's y position */
+                /* Wall's Vertical Position
+                 * Does the player's y position within the wall's y position? 
+                 */
                 if (player.getRightSideXPosition() > wall.getLeftSideXPosition() &&
                 player.getRightSideXPosition() < wall.getRightSideXPosition())
                 {
@@ -243,7 +245,9 @@ namespace Devoid
             else if (player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap &&
                 player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap)
             {
-                /* does the player x position is within the wall's x position */
+                /* Wall's Horizontal Position
+                 * Does the player's x position is within the wall's x position? 
+                 */
                 if (player.getBottomSideYPosition() > wall.getTopSideYPosition() &&
                 player.getBottomSideYPosition() < wall.getBottomSideYPosition())
                 {
