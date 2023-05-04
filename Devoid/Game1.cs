@@ -104,12 +104,12 @@ namespace Devoid
             PlayerBoundaries();
 
             // Player and Object Collision
-            PlayerWallCollision(wall1);
-            PlayerWallCollision(wall2);
-            PlayerWallCollision(wall3);
-            PlayerWallCollision(wall4);
-            PlayerWallCollision(wall5);
-            PlayerWallCollision(wall6);
+            player.Position = PlayerWallCollision(player, wall1);
+            player.Position = PlayerWallCollision(player, wall2);
+            player.Position = PlayerWallCollision(player, wall3);
+            player.Position = PlayerWallCollision(player, wall4);
+            player.Position = PlayerWallCollision(player, wall5);
+            player.Position = PlayerWallCollision(player, wall6);
 
             // set player keybindings
             Keybindings(gameTime);
@@ -211,7 +211,7 @@ namespace Devoid
             }
         }
 
-        private void PlayerWallCollision(Wall wall)
+        private Vector2 PlayerWallCollision(Player player, Wall wall)
         {
             /* Player and Wall Collision */
             var vertex_gap = 2;
@@ -267,6 +267,7 @@ namespace Devoid
                     player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
                 }
             }
+            return player.Position;
         }
 
         private void Keybindings(GameTime gameTime)
