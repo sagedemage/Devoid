@@ -217,13 +217,6 @@ namespace Devoid
             var vertex_gap = 2;
 
             /* Position Detection */
-            // does the player y position is within the wall's y position
-            var wall_vertical_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap && 
-                player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap;
-
-            // does the player x position is within the wall's x position
-            var wall_horizontal_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap && 
-                player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap;
 
             // is player's right side between wall's left side and wall's right side
             var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && 
@@ -242,8 +235,11 @@ namespace Devoid
                 player.getTopSideYPosition() > wall.getTopSideYPosition();
 
             /* Collision Detection */
-            if (wall_vertical_side)
+
+            if (player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap &&
+                player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap)
             {
+                /* does the player y position is within the wall's y position */
                 if (wall_left_side)
                 {
                     // player collides with wall's left side
@@ -255,8 +251,10 @@ namespace Devoid
                     player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
                 }
             }
-            else if (wall_horizontal_side)
+            else if (player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap &&
+                player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap)
             {
+                /* does the player x position is within the wall's x position */
                 if (wall_top_side)
                 {
                     // player collides with wall's top side
