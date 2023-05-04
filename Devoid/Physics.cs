@@ -2,7 +2,7 @@
 
 namespace Devoid
 {
-    public class Collision
+    public class Physics
     {
         public Vector2 PlayerWallCollision(Player player, Wall wall)
         {

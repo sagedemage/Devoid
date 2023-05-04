@@ -102,17 +102,17 @@ namespace Devoid
 
             // TODO: Add your update logic here
             // Player Boundary
-            PlayerBoundaries();
+            player.Position = PlayerBoundaries(player);
 
-            var collision = new Collision();
+            var physics = new Physics();
 
             // Player and Object Collision
-            player.Position = collision.PlayerWallCollision(player, wall1);
-            player.Position = collision.PlayerWallCollision(player, wall2);
-            player.Position = collision.PlayerWallCollision(player, wall3);
-            player.Position = collision.PlayerWallCollision(player, wall4);
-            player.Position = collision.PlayerWallCollision(player, wall5);
-            player.Position = collision.PlayerWallCollision(player, wall6);
+            player.Position = physics.PlayerWallCollision(player, wall1);
+            player.Position = physics.PlayerWallCollision(player, wall2);
+            player.Position = physics.PlayerWallCollision(player, wall3);
+            player.Position = physics.PlayerWallCollision(player, wall4);
+            player.Position = physics.PlayerWallCollision(player, wall5);
+            player.Position = physics.PlayerWallCollision(player, wall6);
 
             // set player keybindings
             Keybindings(gameTime);
@@ -189,7 +189,7 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        public void PlayerBoundaries()
+        public Vector2 PlayerBoundaries(Player player)
         {
             /* Player Boundaries */
             if (player.Position.X > _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
@@ -212,6 +212,7 @@ namespace Devoid
                 // Botton Boundary
                 player.Position.Y = player.getTextureHeight() / 2;
             }
+            return player.Position;
         }
 
         private void Keybindings(GameTime gameTime)
