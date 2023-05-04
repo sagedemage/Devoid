@@ -216,18 +216,7 @@ namespace Devoid
             /* Player and Wall Collision */
             var vertex_gap = 2;
 
-            /* Position Detection */
-
-            // is player above wall's top side
-            var wall_top_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
-                player.getBottomSideYPosition() < wall.getBottomSideYPosition();
-
-            // is the player below the wall's bottom side
-            var wall_bottom_side = player.getTopSideYPosition() < wall.getBottomSideYPosition() && 
-                player.getTopSideYPosition() > wall.getTopSideYPosition();
-
             /* Collision Detection */
-
             if (player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap &&
                 player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap)
             {
@@ -251,13 +240,17 @@ namespace Devoid
                 player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap)
             {
                 /* does the player x position is within the wall's x position */
-                if (wall_top_side)
+                if (player.getBottomSideYPosition() > wall.getTopSideYPosition() &&
+                player.getBottomSideYPosition() < wall.getBottomSideYPosition())
                 {
+                    /* is player above wall's top side */
                     // player collides with wall's top side
                     player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
                 }
-                else if (wall_bottom_side)
+                else if (player.getTopSideYPosition() < wall.getBottomSideYPosition() &&
+                player.getTopSideYPosition() > wall.getTopSideYPosition())
                 {
+                    /* is the player below the wall's bottom side */
                     // player collides with wall's bottom side
                     player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
                 }
