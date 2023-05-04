@@ -191,8 +191,6 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        
-
         public GraphicsDeviceManager GetGraphics()
         {
             return _graphics;
