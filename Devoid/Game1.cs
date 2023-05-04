@@ -1,7 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Devoid.Entities;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using NUnit.Framework.Constraints;
 
 namespace Devoid
 {
@@ -100,19 +102,23 @@ namespace Devoid
                 Exit();
 
             // TODO: Add your update logic here
+            var physics = new Physics();
+
             // Player Boundary
-            PlayerBoundaries();
+            physics.PlayerBoundaries(ref player, _graphics);
 
             // Player and Object Collision
-            PlayerWallCollision(wall1);
-            PlayerWallCollision(wall2);
-            PlayerWallCollision(wall3);
-            PlayerWallCollision(wall4);
-            PlayerWallCollision(wall5);
-            PlayerWallCollision(wall6);
+            physics.PlayerWallCollision(ref player, wall1);
+            physics.PlayerWallCollision(ref player, wall2);
+            physics.PlayerWallCollision(ref player, wall3);
+            physics.PlayerWallCollision(ref player, wall4);
+            physics.PlayerWallCollision(ref player, wall5);
+            physics.PlayerWallCollision(ref player, wall6);
+
+            var controls = new Controls();
 
             // set player keybindings
-            Keybindings(gameTime);
+            controls.Keybindings(gameTime, ref player);
 
             base.Update(gameTime);
         }
@@ -186,109 +192,9 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        public void PlayerBoundaries()
+        public GraphicsDeviceManager GetGraphics()
         {
-            /* Player Boundaries */
-            if (player.Position.X > _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
-            {
-                // Right Boundary
-                player.Position.X = _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2;
-            }
-            else if (player.Position.X < player.getTextureWidth() / 2)
-            {
-                // Left Boundary
-                player.Position.X = player.getTextureWidth() / 2;
-            }
-            if (player.Position.Y > _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2)
-            {
-                // Top Boundary
-                player.Position.Y = _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2;
-            }
-            else if (player.Position.Y < player.getTextureHeight() / 2)
-            {
-                // Botton Boundary
-                player.Position.Y = player.getTextureHeight() / 2;
-            }
-        }
-
-        private void PlayerWallCollision(Wall wall)
-        {
-            /* Player and Wall Collision */
-            var vertex_gap = 2;
-
-            /* Position Detection */
-            // does the player y position is within the wall's y position
-            var wall_vertical_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() + vertex_gap && 
-                player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap;
-
-            // does the player x position is within the wall's x position
-            var wall_horizontal_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() + vertex_gap && 
-                player.getLeftSideXPosition() < wall.getRightSideXPosition() - vertex_gap;
-
-            // is player's right side between wall's left side and wall's right side
-            var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && 
-                player.getRightSideXPosition() < wall.getRightSideXPosition();
-
-            // is player's left side between wall's left side and wall's right side
-            var wall_right_side = player.getLeftSideXPosition() < wall.getRightSideXPosition() && 
-                player.getLeftSideXPosition() > wall.getLeftSideXPosition();
-
-            // is player above wall's top side
-            var topsidey = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
-                player.getBottomSideYPosition() < wall.getBottomSideYPosition();
-
-            // is the player below the wall's bottom side
-            var bottomsidey = player.getTopSideYPosition() < wall.getBottomSideYPosition() && 
-                player.getTopSideYPosition() > wall.getTopSideYPosition();
-
-            /* Collision Detection */
-            if (wall_left_side && wall_vertical_side)
-            {
-                // player collides with wall's left side
-                player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
-            }
-            else if (wall_right_side && wall_vertical_side)
-            {
-                // player collides with wall's right side
-                player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
-            }
-            else if (topsidey && wall_horizontal_side)
-            {
-                // player collides with wall's top side
-                player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
-            }
-            else if (bottomsidey && wall_horizontal_side)
-            {
-                // player collides with wall's bottom side
-                player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
-            }
-        }
-
-        private void Keybindings(GameTime gameTime)
-        {
-            /* Player Movement */
-            var kstate = Keyboard.GetState();
-
-            if (kstate.IsKeyDown(Keys.Up))
-            {
-                // Move the player up
-                player.Position.Y -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Down))
-            {
-                // Move the player down
-                player.Position.Y += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Left))
-            {
-                // Move the player left
-                player.Position.X -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Right))
-            {
-                // Move the player right
-                player.Position.X += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
+            return _graphics;
         }
     }
 }
