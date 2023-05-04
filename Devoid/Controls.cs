@@ -11,7 +11,7 @@ namespace Devoid
 {
     public class Controls
     {
-        public Vector2 Keybindings(GameTime gameTime, Entities.Player player)
+        public void Keybindings(GameTime gameTime, ref Entities.Player player)
         {
             /* Player Movement */
             var kstate = Keyboard.GetState();
@@ -36,8 +36,6 @@ namespace Devoid
                 // Move the player right
                 player.Position.X += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
-
-            return player.Position;
         }
     }
 }

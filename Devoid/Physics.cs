@@ -5,7 +5,7 @@ namespace Devoid
 {
     public class Physics
     {
-        public Vector2 PlayerBoundaries(Entities.Player player, GraphicsDeviceManager graphics)
+        public void PlayerBoundaries(ref Entities.Player player, GraphicsDeviceManager graphics)
         {
             /* Player Boundaries */
             if (player.Position.X > graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
@@ -28,10 +28,9 @@ namespace Devoid
                 // Botton Boundary
                 player.Position.Y = player.getTextureHeight() / 2;
             }
-            return player.Position;
         }
 
-        public Vector2 PlayerWallCollision(Player player, Wall wall)
+        public void PlayerWallCollision(ref Player player, Wall wall)
         {
             /* Player and Wall Collision */
             var vertex_gap = 2;
@@ -87,7 +86,6 @@ namespace Devoid
                     player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
                 }
             }
-            return player.Position;
         }
     }
 }

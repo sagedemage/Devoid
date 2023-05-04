@@ -105,20 +105,20 @@ namespace Devoid
             var physics = new Physics();
 
             // Player Boundary
-            player.Position = physics.PlayerBoundaries(player, _graphics);
+            physics.PlayerBoundaries(ref player, _graphics);
 
             // Player and Object Collision
-            player.Position = physics.PlayerWallCollision(player, wall1);
-            player.Position = physics.PlayerWallCollision(player, wall2);
-            player.Position = physics.PlayerWallCollision(player, wall3);
-            player.Position = physics.PlayerWallCollision(player, wall4);
-            player.Position = physics.PlayerWallCollision(player, wall5);
-            player.Position = physics.PlayerWallCollision(player, wall6);
+            physics.PlayerWallCollision(ref player, wall1);
+            physics.PlayerWallCollision(ref player, wall2);
+            physics.PlayerWallCollision(ref player, wall3);
+            physics.PlayerWallCollision(ref player, wall4);
+            physics.PlayerWallCollision(ref player, wall5);
+            physics.PlayerWallCollision(ref player, wall6);
 
             var controls = new Controls();
 
             // set player keybindings
-            player.Position = controls.Keybindings(gameTime, player);
+            controls.Keybindings(gameTime, ref player);
 
             base.Update(gameTime);
         }

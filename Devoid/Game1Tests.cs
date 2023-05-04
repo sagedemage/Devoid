@@ -23,7 +23,7 @@ namespace Devoid
             game1.player.Position.X = 30;
 
             var physics = new Physics();
-            game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
+            physics.PlayerBoundaries(ref game1.player, game1.GetGraphics());
 
             // Assert
             Assert.AreEqual(game1.player.Position.X, 32);
@@ -41,7 +41,7 @@ namespace Devoid
             game1.player.Position.X = 780;
 
             var physics = new Physics();
-            game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
+            physics.PlayerBoundaries(ref game1.player, game1.GetGraphics());
 
             // Assert
             Assert.AreEqual(game1.player.Position.X, 768);
@@ -59,7 +59,7 @@ namespace Devoid
             game1.player.Position.Y = 30;
 
             var physics = new Physics();
-            game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
+            physics.PlayerBoundaries(ref game1.player, game1.GetGraphics());
 
             // Assert
             Assert.AreEqual(game1.player.Position.Y, 32);
@@ -77,7 +77,7 @@ namespace Devoid
             game1.player.Position.Y = 460;
 
             var physics = new Physics();
-            game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
+            physics.PlayerBoundaries(ref game1.player, game1.GetGraphics());
 
             // Assert
             Assert.AreEqual(game1.player.Position.Y, 448);
