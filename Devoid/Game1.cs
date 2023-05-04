@@ -218,14 +218,6 @@ namespace Devoid
 
             /* Position Detection */
 
-            // is player's right side between wall's left side and wall's right side
-            var wall_left_side = player.getRightSideXPosition() > wall.getLeftSideXPosition() && 
-                player.getRightSideXPosition() < wall.getRightSideXPosition();
-
-            // is player's left side between wall's left side and wall's right side
-            var wall_right_side = player.getLeftSideXPosition() < wall.getRightSideXPosition() && 
-                player.getLeftSideXPosition() > wall.getLeftSideXPosition();
-
             // is player above wall's top side
             var wall_top_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
                 player.getBottomSideYPosition() < wall.getBottomSideYPosition();
@@ -240,13 +232,17 @@ namespace Devoid
                 player.getTopSideYPosition() < wall.getBottomSideYPosition() - vertex_gap)
             {
                 /* does the player y position is within the wall's y position */
-                if (wall_left_side)
+                if (player.getRightSideXPosition() > wall.getLeftSideXPosition() &&
+                player.getRightSideXPosition() < wall.getRightSideXPosition())
                 {
+                    /* is player's right side between wall's left side and wall's right side */
                     // player collides with wall's left side
                     player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
                 }
-                else if (wall_right_side)
+                else if (player.getLeftSideXPosition() < wall.getRightSideXPosition() &&
+                player.getLeftSideXPosition() > wall.getLeftSideXPosition())
                 {
+                    /* is player's left side between wall's left side and wall's right side */
                     // player collides with wall's right side
                     player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
                 }
