@@ -5,7 +5,7 @@ namespace Devoid
 {
     public class Physics
     {
-        public void PlayerBoundaries(ref Entities.Player player, GraphicsDeviceManager graphics)
+        public void PlayerBoundaries(ref Player player, GraphicsDeviceManager graphics)
         {
             /* Player Boundaries */
             if (player.Position.X > graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)

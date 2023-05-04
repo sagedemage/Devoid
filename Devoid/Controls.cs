@@ -11,7 +11,7 @@ namespace Devoid
 {
     public class Controls
     {
-        public void Keybindings(GameTime gameTime, ref Entities.Player player)
+        public void Keybindings(GameTime gameTime, ref Player player)
         {
             /* Player Movement */
             var kstate = Keyboard.GetState();
