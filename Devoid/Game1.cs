@@ -234,33 +234,39 @@ namespace Devoid
                 player.getLeftSideXPosition() > wall.getLeftSideXPosition();
 
             // is player above wall's top side
-            var topsidey = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
+            var wall_top_side = player.getBottomSideYPosition() > wall.getTopSideYPosition() && 
                 player.getBottomSideYPosition() < wall.getBottomSideYPosition();
 
             // is the player below the wall's bottom side
-            var bottomsidey = player.getTopSideYPosition() < wall.getBottomSideYPosition() && 
+            var wall_bottom_side = player.getTopSideYPosition() < wall.getBottomSideYPosition() && 
                 player.getTopSideYPosition() > wall.getTopSideYPosition();
 
             /* Collision Detection */
-            if (wall_left_side && wall_vertical_side)
+            if (wall_vertical_side)
             {
-                // player collides with wall's left side
-                player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
+                if (wall_left_side)
+                {
+                    // player collides with wall's left side
+                    player.Position.X = wall.Position.X - wall.getTextureWidth() / 2 - player.getTextureWidth() / 2;
+                }
+                else if (wall_right_side)
+                {
+                    // player collides with wall's right side
+                    player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
+                }
             }
-            else if (wall_right_side && wall_vertical_side)
+            else if (wall_horizontal_side)
             {
-                // player collides with wall's right side
-                player.Position.X = wall.Position.X + wall.getTextureWidth() / 2 + player.getTextureWidth() / 2;
-            }
-            else if (topsidey && wall_horizontal_side)
-            {
-                // player collides with wall's top side
-                player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
-            }
-            else if (bottomsidey && wall_horizontal_side)
-            {
-                // player collides with wall's bottom side
-                player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
+                if (wall_top_side)
+                {
+                    // player collides with wall's top side
+                    player.Position.Y = wall.Position.Y - wall.getTextureHeight() / 2 - player.getTextureHeight() / 2;
+                }
+                else if (wall_bottom_side)
+                {
+                    // player collides with wall's bottom side
+                    player.Position.Y = wall.Position.Y + wall.getTextureHeight() / 2 + player.getTextureHeight() / 2;
+                }
             }
         }
 
