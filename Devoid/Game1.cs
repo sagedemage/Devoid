@@ -101,10 +101,10 @@ namespace Devoid
                 Exit();
 
             // TODO: Add your update logic here
-            // Player Boundary
-            player.Position = PlayerBoundaries(player);
-
             var physics = new Physics();
+
+            // Player Boundary
+            player.Position = physics.PlayerBoundaries(player, _graphics);
 
             // Player and Object Collision
             player.Position = physics.PlayerWallCollision(player, wall1);
@@ -189,32 +189,6 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        public Vector2 PlayerBoundaries(Player player)
-        {
-            /* Player Boundaries */
-            if (player.Position.X > _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
-            {
-                // Right Boundary
-                player.Position.X = _graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2;
-            }
-            else if (player.Position.X < player.getTextureWidth() / 2)
-            {
-                // Left Boundary
-                player.Position.X = player.getTextureWidth() / 2;
-            }
-            if (player.Position.Y > _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2)
-            {
-                // Top Boundary
-                player.Position.Y = _graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2;
-            }
-            else if (player.Position.Y < player.getTextureHeight() / 2)
-            {
-                // Botton Boundary
-                player.Position.Y = player.getTextureHeight() / 2;
-            }
-            return player.Position;
-        }
-
         private void Keybindings(GameTime gameTime)
         {
             /* Player Movement */
@@ -240,6 +214,11 @@ namespace Devoid
                 // Move the player right
                 player.Position.X += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
             }
+        }
+
+        public GraphicsDeviceManager GetGraphics()
+        {
+            return _graphics;
         }
     }
 }

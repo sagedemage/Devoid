@@ -4,6 +4,32 @@ namespace Devoid
 {
     public class Physics
     {
+        public Vector2 PlayerBoundaries(Player player, GraphicsDeviceManager graphics)
+        {
+            /* Player Boundaries */
+            if (player.Position.X > graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)
+            {
+                // Right Boundary
+                player.Position.X = graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2;
+            }
+            else if (player.Position.X < player.getTextureWidth() / 2)
+            {
+                // Left Boundary
+                player.Position.X = player.getTextureWidth() / 2;
+            }
+            if (player.Position.Y > graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2)
+            {
+                // Top Boundary
+                player.Position.Y = graphics.PreferredBackBufferHeight - player.getTextureHeight() / 2;
+            }
+            else if (player.Position.Y < player.getTextureHeight() / 2)
+            {
+                // Botton Boundary
+                player.Position.Y = player.getTextureHeight() / 2;
+            }
+            return player.Position;
+        }
+
         public Vector2 PlayerWallCollision(Player player, Wall wall)
         {
             /* Player and Wall Collision */
