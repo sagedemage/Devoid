@@ -22,7 +22,6 @@ namespace Devoid
             // Act
             game1.player.Position.X = 30;
 
-            //game1.PlayerBoundaries();
             var physics = new Physics();
             game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
 
@@ -41,7 +40,6 @@ namespace Devoid
             // Act
             game1.player.Position.X = 780;
 
-            //game1.PlayerBoundaries();
             var physics = new Physics();
             game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
 
@@ -60,7 +58,6 @@ namespace Devoid
             // Act
             game1.player.Position.Y = 30;
 
-            //game1.PlayerBoundaries();
             var physics = new Physics();
             game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
 
@@ -79,7 +76,6 @@ namespace Devoid
             // Act
             game1.player.Position.Y = 460;
 
-            //game1.PlayerBoundaries();
             var physics = new Physics();
             game1.player.Position = physics.PlayerBoundaries(game1.player, game1.GetGraphics());
 
