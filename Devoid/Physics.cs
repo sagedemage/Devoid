@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework;
+﻿using Devoid.Entities;
+using Microsoft.Xna.Framework;
 
 namespace Devoid
 {
     public class Physics
     {
-        public Vector2 PlayerBoundaries(Player player, GraphicsDeviceManager graphics)
+        public Vector2 PlayerBoundaries(Entities.Player player, GraphicsDeviceManager graphics)
         {
             /* Player Boundaries */
             if (player.Position.X > graphics.PreferredBackBufferWidth - player.getTextureWidth() / 2)

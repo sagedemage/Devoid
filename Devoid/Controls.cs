@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Devoid.Entities;
 
 namespace Devoid
 {
     public class Controls
     {
-        public Vector2 Keybindings(GameTime gameTime, Player player)
+        public Vector2 Keybindings(GameTime gameTime, Entities.Player player)
         {
             /* Player Movement */
             var kstate = Keyboard.GetState();

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 
-namespace Devoid
+namespace Devoid.Entities
 {
     public class Player
     {
