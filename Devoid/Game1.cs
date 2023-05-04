@@ -114,8 +114,10 @@ namespace Devoid
             player.Position = physics.PlayerWallCollision(player, wall5);
             player.Position = physics.PlayerWallCollision(player, wall6);
 
+            var controls = new Controls();
+
             // set player keybindings
-            Keybindings(gameTime);
+            player.Position = controls.Keybindings(gameTime, player);
 
             base.Update(gameTime);
         }
@@ -189,32 +191,7 @@ namespace Devoid
             base.Draw(gameTime);
         }
 
-        private void Keybindings(GameTime gameTime)
-        {
-            /* Player Movement */
-            var kstate = Keyboard.GetState();
-
-            if (kstate.IsKeyDown(Keys.Up))
-            {
-                // Move the player up
-                player.Position.Y -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Down))
-            {
-                // Move the player down
-                player.Position.Y += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Left))
-            {
-                // Move the player left
-                player.Position.X -= player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-            else if (kstate.IsKeyDown(Keys.Right))
-            {
-                // Move the player right
-                player.Position.X += player.getSpeed() * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            }
-        }
+        
 
         public GraphicsDeviceManager GetGraphics()
         {
