@@ -370,3 +370,9 @@ FodyWeavers.xsd
 
 # Ignore unit test output folder
 test_output/
+
+# Gimp files
+*.xcf
+
+# PNG image files
+*.png
